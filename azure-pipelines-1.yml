@@ -17,7 +17,7 @@ jobs:
     - script: echo this is my second job
       displayName: second job is success
 - job: job3
-  dependsOn:job2
+  dependsOn: job2
   steps:
   - script: echo thos is my first job
     displayName: first job is success
