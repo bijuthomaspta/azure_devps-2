@@ -9,7 +9,8 @@ strategy:
     mac:
       operatingsysem: 'macos-latest'
 
-pool: $(operatingsystem)
+pool: 
+  vmImage: $(operatingsystem)
 
 steps:
 - script: echo Hello, world!
