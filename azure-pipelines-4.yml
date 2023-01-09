@@ -4,13 +4,13 @@ trigger:
 
 strategy:
   matrix: 
-    linux: 
-      operatingsystem: 'ubuntu-latest'
-    mac:
-      operatingsystem: 'macos-latest'
+    mylinux: 
+      myfavtos: 'ubuntu-latest'
+    mymac:
+      myfavtos: 'macos-latest'
 
 pool: 
-  vmImage: $(operatingsystem)
+  vmImage: $(myfavtos)
 
 steps:
 - script: echo Hello, world!
