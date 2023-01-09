@@ -16,5 +16,22 @@ jobs:
   steps:
     - script: echo this is my second job
       displayName: second job is success
+- job: job3
+  dependsOn:job2
+  steps:
+  - script: echo thos is my first job
+    displayName: first job is success
 
+- job: job4
+  dependsOn: job2
+  steps:
+  - script: echo thos is my first job
+    displayName: first job is success
+
+
+- job: job5
+  dependsOn: job4
+  steps:
+  - script: echo thos is my first job
+    displayName: first job is success
 
