@@ -63,5 +63,5 @@ stages:
     jobs:
       - job: job1
         steps:
-          - script: echo $(1st_variable))
+          - script: echo $(1st_variable)
             displayName:  job is succeed
