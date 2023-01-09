@@ -7,7 +7,7 @@ strategy:
     linux: 
       operatingsystem: 'ubuntu-latest'
     mac:
-      operatingsysem: 'mac-latest'
+      operatingsysem: 'macos-latest'
 
 pool: $(operatingsystem)
 
