@@ -12,6 +12,15 @@ stages:
     - job: job1
       steps:
         - script: echo thos is my first job
+        - bash: echo $(Agent.BuildDirectory)
+        - bash: echo $(Build.TriggeredBy.BuildNumber)
+        - bash: echo $(Strategy.CycleName)
+        - bash: echo $(Build.BuildNumber)
+        - bash: echo $(Build.BuildId)
+        - bash: echo $(Build.Repository.ID)
+        - bash: echo $(Build.SourceVersionMessage)
+        - bash: echo $(Build.TriggeredBy.BuildNumber)
+        - bash: ls -a $(Build.SourcesDirectory)
           displayName: first job is success
     - job: job2
       dependsOn: job1
@@ -64,4 +73,5 @@ stages:
       - job: job1
         steps:
           - script: echo $(1st_variable)
+          - bash: echo $(2nd-variable)
             displayName:  job is succeed
