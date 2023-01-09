@@ -55,7 +55,9 @@ stages:
             displayName: job1 on qa_deploy is successing
 
   - stage: prod_deploy
-    dependsOn: Build, qa_deploy
+    dependsOn: 
+      - Build
+      - qa_deploy
     jobs:
       - job: job1
         steps:
