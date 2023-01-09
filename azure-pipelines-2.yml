@@ -47,11 +47,13 @@ stages:
           displayName: first Job is success
 
   - stage: qa_deploy
+    variables:
+      variable_name: QA_DEPLOY_VARIABLE_VALLUE
     dependsOn: Build
     jobs:
       - job: job1
         steps:
-          - script: echo this is job 2 on qa_deploy
+          - script: echo this is job 2 on $(variable_name)
             displayName: job1 on qa_deploy is successing
 
   - stage: prod_deploy
@@ -61,5 +63,5 @@ stages:
     jobs:
       - job: job1
         steps:
-          - script: echo this is job1 on prod_deploy
+          - script: echo $(1st_variable))
             displayName:  job is succeed
