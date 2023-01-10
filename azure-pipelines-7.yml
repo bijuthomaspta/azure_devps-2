@@ -43,11 +43,4 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes/'
     environmentServiceName: 'Azure_resource_connection'
     commandOptions: '-var client_id=$(a) -var client_secret=$(b) -var ssh_public_key=$(publickey.secureFilePath)'
-- task: TerraformCLI@0
-  inputs:
-    command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes/'
-    environmentServiceName: 'Azure_resource_connection'
-    commandOptions: '-var client_id=$(a) -var client_secret=$(b) -var ssh_public_key=$(publickey.securefile)'
-    allowTelemetryCollection: true
     allowTelemetryCollection: true
