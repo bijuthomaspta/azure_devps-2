@@ -35,7 +35,7 @@ steps:
     artifactName: 'manifest'
     itemPattern: '**/*.yml'
     targetPath: '$(system.ArtifactsDirectory)'
-    
+
 - task: KubernetesManifest@0
   inputs:
     action: 'deploy'
