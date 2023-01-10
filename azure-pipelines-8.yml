@@ -39,7 +39,7 @@ steps:
 - task: KubernetesManifest@0
   inputs:
     action: 'deploy'
-    kubernetesServiceConnection: 'Azure_kubernetes_connection'
+    kubernetesServiceConnection: 'Azure_kubernetes_connection-2'
     namespace: 'default'
     manifests: '$(system.ArtifactsDirectory)/configuration/kubernetes/deployment.yaml'
     containers: 'bijuthomaspta/dockerpush_via_azure_devops:285'
