@@ -34,3 +34,10 @@ steps:
   name:  publickey
   inputs:
     secureFile: 'azure_rsa .pub'
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes/'
+    commandOptions: '-var client_id=$(a) -var client_secret=$(b) -var ssh_public_key=$(publickey.securefile)'
+    allowTelemetryCollection: true
