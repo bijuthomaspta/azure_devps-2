@@ -1,0 +1,40 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker_hub_connection'
+    repository: 'bijuthomaspta/dockerpush_via_azure_devops'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'manifest'
+    publishLocation: 'Container'
+- task: DownloadPipelineArtifact@2
+  inputs:
+    buildType: 'current'
+    artifactName: 'manifest'
+    itemPattern: '**/*.yml'
+    targetPath: '$(system.ArtifactsDirectory)'
+    
+- task: KubernetesManifest@0
+  inputs:
+    action: 'deploy'
+    kubernetesServiceConnection: 'Azure_kubernetes_connection'
+    namespace: 'default'
+    manifests: '$(system.ArtifactsDirectory)/configuration/kubernetes/deployment.yaml'
+    containers: 'bijuthomaspta/dockerpush_via_azure_devops:285'
