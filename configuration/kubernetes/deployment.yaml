@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: currency-exchange
-        image: bijuthomaspta/currency-exchange-devops
+        image: bijuthomaspta/dockerpush_via_azure_devops
         imagePullPolicy: IfNotPresent
         ports:
         - name: liveness-port
