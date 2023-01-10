@@ -13,12 +13,12 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- task: Docker@2
-  inputs:
-    containerRegistry: 'Docker_hub_connection'
-    repository: 'bijuthomaspta/dockerpush_via_azure_devops'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+# - task: Docker@2
+#   inputs:
+#     containerRegistry: 'Docker_hub_connection'
+#     repository: 'bijuthomaspta/dockerpush_via_azure_devops'
+#     command: 'buildAndPush'
+#     Dockerfile: '**/Dockerfile'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
