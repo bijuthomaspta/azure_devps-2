@@ -8,7 +8,8 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
-
+variables:
+  tag: '$(Build.BuildID)'
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
@@ -42,4 +43,4 @@ steps:
     kubernetesServiceConnection: 'Azure_kubernetes_connection-2'
     namespace: 'default'
     manifests: '$(system.ArtifactsDirectory)/configuration/kubernetes/deployment.yaml'
-    containers: 'bijuthomaspta/dockerpush_via_azure_devops:285'
+    containers: 'bijuthomaspta/dockerpush_via_azure_devops:$(tag)'
