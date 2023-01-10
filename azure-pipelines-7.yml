@@ -22,9 +22,9 @@ steps:
     backendServiceArm: 'Azure_resource_connection'
     backendAzureRmSubscriptionId: '5282a96d-cc9d-4a51-9ba6-6e649fa394bc'
     ensureBackend: true
-    backendAzureRmResourceGroupName: 'terraform-backend_resource_group'
+    backendAzureRmResourceGroupName: 'terraform-backend-resource-group'
     backendAzureRmResourceGroupLocation: 'westeurope'
-    backendAzureRmStorageAccountName: 'storageAccountabcd'
+    backendAzureRmStorageAccountName: 'storageAccountabcdxyz'
     backendAzureRmContainerName: 'containersample'
     backendAzureRmKey: 'kub-dev.tfstate'
     allowTelemetryCollection: true
