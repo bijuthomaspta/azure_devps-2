@@ -44,3 +44,11 @@ steps:
     environmentServiceName: 'Azure_resource_connection'
     commandOptions: '-var client_id=$(a) -var client_secret=$(b) -var ssh_public_key=$(publickey.secureFilePath)'
     allowTelemetryCollection: true
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'destroy'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes/'
+    environmentServiceName: 'Azure_resource_connection'
+    commandOptions: '-var client_id=$(a) -var client_secret=$(b) -var ssh_public_key=$(publickey.secureFilePath)'
+    allowTelemetryCollection: true
