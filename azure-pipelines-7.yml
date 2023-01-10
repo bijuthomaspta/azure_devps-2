@@ -17,7 +17,7 @@ steps:
   inputs:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes/'
-    commandOptions: '-var client_id=$(a) -var client_secret=$(b) -var ssh_public_key=$(publickey.secureFile)'
+    commandOptions: '-var client_id=$(a) -var client_secret=$(b) -var ssh_public_key=$(publickey.secureFilePath)'
     backendType: 'azurerm'
     backendServiceArm: 'Azure_resource_connection'
     backendAzureRmSubscriptionId: '5282a96d-cc9d-4a51-9ba6-6e649fa394bc'
