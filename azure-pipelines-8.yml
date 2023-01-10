@@ -19,11 +19,16 @@ steps:
 #     repository: 'bijuthomaspta/dockerpush_via_azure_devops'
 #     command: 'buildAndPush'
 #     Dockerfile: '**/Dockerfile'
-# - task: PublishBuildArtifacts@1
-#   inputs:
-#     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-#     ArtifactName: 'manifest'
-#     publishLocation: 'Container'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: '**/*.yaml'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'manifest'
+    publishLocation: 'Container'
 - task: DownloadPipelineArtifact@2
   inputs:
     buildType: 'current'
