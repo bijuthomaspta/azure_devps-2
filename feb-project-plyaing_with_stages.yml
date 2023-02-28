@@ -14,12 +14,12 @@ stages:
       - job: firstjob
         steps:
         - bash: echo my fifrst job
-                echo $(System.AccessToken)
-                eco $(Agent.TempDirectory)
-                echo ls -l $(Agent.TempDirectory)
-                echo $(Build.BinariesDirectory)
-                echo $(Build.ArtifactStagingDirectory)
-                ls -l $(Build.ArtifactStagingDirectory)
+        - bash: echo $(System.AccessToken)
+        - bash: echo $(Agent.TempDirectory)
+        - bash: echo ls -l $(Agent.TempDirectory)
+        - bash:        echo $(Build.BinariesDirectory)
+        - bash:        echo $(Build.ArtifactStagingDirectory)
+        - bash:      ls -l $(Build.ArtifactStagingDirectory)
       - job: second_job
         steps:
           - bash: echo my second job
