@@ -14,41 +14,13 @@ stages:
       - job: firstjob
         steps:
         - bash: echo my fifrst job
+                echo $(System.AccessToken)
+                eco $(Agent.TempDirectory)
+                echo ls -l $(Agent.TempDirectory)
+                echo $(Build.BinariesDirectory)
+                echo $(Build.ArtifactStagingDirectory)
+                ls -l $(Build.ArtifactStagingDirectory)
       - job: second_job
         steps:
           - bash: echo my second job
-  - stage: Dev
-    variables:
-      environent: Dev
-    dependsOn: Build
-    jobs:
-      - job: firstjob
-        steps:
-        - bash: echo my fifrst job
-      - job: second_job
-        steps:
-          - bash: echo my second job
-
-  - stage: QA
-    variables:
-       environent: QA
-    dependsOn: Dev
-    jobs:
-      - job: firstjob
-        steps:
-        - bash: echo my fifrst job
-      - job: second_job
-        steps:
-          - bash: echo my second job
-
-  - stage: prouction
-    variables: 
-      environent: prouction
-    dependsOn: Dev
-    jobs:
-      - job: firstjob
-        steps:
-        - bash: echo my fifrst job
-      - job: second_job
-        steps:
-          - bash: echo my second job
+ 
