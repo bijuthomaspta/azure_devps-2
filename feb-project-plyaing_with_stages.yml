@@ -18,6 +18,9 @@ stages:
         steps:
           - bash: echo my second job
   - stage: Dev
+    variables:
+      environent: Dev
+    dependsOn: Build
     jobs:
       - job: firstjob
         steps:
@@ -27,6 +30,9 @@ stages:
           - bash: echo my second job
 
   - stage: QA
+    variables:
+       environent: QA
+    dependsOn: Dev
     jobs:
       - job: firstjob
         steps:
@@ -36,6 +42,9 @@ stages:
           - bash: echo my second job
 
   - stage: prouction
+    variables: 
+      environent: prouction
+    dependsOn: Dev
     jobs:
       - job: firstjob
         steps:
