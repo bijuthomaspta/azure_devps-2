@@ -6,20 +6,39 @@
 trigger:
 - master
 
-strategy:
-  matrix:
-    linux: 
-      operatingsystem: 'ubuntu-latest'
-    mac: 
-      operatingsystem: 'macos-latest'
+# strategy:
+#   matrix:
+#     linux: 
+#       operatingsystem: 'ubuntu-latest'
+#     mac: 
+#       operatingsystem: 'macos-latest'
 
 pool:
-  vmImage: $(operatingsystem)
+  vmImage: ubuntu-latest #$(operatingsystem)
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+  - stage: Build
+    jobs:
+      - job: Build_job
+        steps:
+        - bash: echo "Do Build"
+  - stage: Dev_Deploy
+    jobs:
+      - deployment: Dev_Deploy_Job
+        environment: Dev
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - script: echo deploy to Dev 
 
-- script: |
-    echo Reunning on $(operatingsystem)
-  displayName: 'Run a multi-line script'
+  - stage: Qa_Deploy
+    jobs:
+      - deployment: Qa_Deploy_Job
+        environment: Qa
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - script: echo deploy to Qa 
+              
