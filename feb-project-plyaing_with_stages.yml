@@ -20,5 +20,10 @@ stages:
         - bash:        echo $(Build.BinariesDirectory)
         - bash:        echo $(Build.ArtifactStagingDirectory)
         - bash:      ls -l $(Build.ArtifactStagingDirectory)
-          
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(system.DefaultworkingDirectory)'
+            Contents: '**'
+            TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        - bash: ls -R $(Build.ArtifactStagingDirectory)
  
