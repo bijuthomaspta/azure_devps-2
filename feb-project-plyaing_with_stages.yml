@@ -22,5 +22,6 @@ stages:
         - bash:      ls -l $(Build.ArtifactStagingDirectory)
       - job: second_job
         steps:
-          - bash: echo my second job
+          - bash: echo my hi
+          
  
