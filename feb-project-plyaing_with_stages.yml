@@ -20,8 +20,5 @@ stages:
         - bash:        echo $(Build.BinariesDirectory)
         - bash:        echo $(Build.ArtifactStagingDirectory)
         - bash:      ls -l $(Build.ArtifactStagingDirectory)
-      - job: second_job
-        steps:
-          
           
  
