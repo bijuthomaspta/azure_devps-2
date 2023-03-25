@@ -30,7 +30,7 @@ steps:
     backendAzureRmResourceGroupLocation: 'westeurope'
     backendAzureRmStorageAccountName: 'storagezccountxyz'
     backendAzureRmContainerName: 'sotorageaccountcontiner'
-    backendAzureRmKey: 'kubernets-dev3.tfstate'
+    backendAzureRmKey: 'kubernets-dev4.tfstate'
     allowTelemetryCollection: true
 
 
