@@ -26,7 +26,7 @@ steps:
     backendAzureRmResourceGroupLocation: 'westeurope'
     backendAzureRmStorageAccountName: 'storagezccountxyz'
     backendAzureRmContainerName: 'sotorageaccountcontiner'
-    backendAzureRmKey: 'kubernets-dev2.tfstate'
+    backendAzureRmKey: 'kubernets-dev3.tfstate'
     allowTelemetryCollection: true
 - task: DownloadSecureFile@1
   inputs:
