@@ -12,6 +12,10 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
+  
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: 'azure_rsa.pub'
 
 - task: TerraformCLI@0
   inputs:
@@ -28,22 +32,11 @@ steps:
     backendAzureRmContainerName: 'sotorageaccountcontiner'
     backendAzureRmKey: 'kubernets-dev3.tfstate'
     allowTelemetryCollection: true
-- task: DownloadSecureFile@1
-  inputs:
-    secureFile: 'azure_rsa.pub'
+
 
 - task: TerraformCLI@0
   inputs:
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes/'
     commandOptions: '-var id=$(id) -var p=$(p) -var ssh_key=$(pulickey.azure_rsa.pub)'
-    backendType: 'azurerm'
-    backendServiceArm: 'Azure_resource_connection'
-    backendAzureRmSubscriptionId: '5282a96d-cc9d-4a51-9ba6-6e649fa394bc'
-    ensureBackend: true
-    backendAzureRmResourceGroupName: 'terraform-backend_rg'
-    backendAzureRmResourceGroupLocation: 'westeurope'
-    backendAzureRmStorageAccountName: 'storagezccountxyz'
-    backendAzureRmContainerName: 'sotorageaccountcontiner'
-    backendAzureRmKey: 'kubernets-dev3.tfstate'
     allowTelemetryCollection: true
