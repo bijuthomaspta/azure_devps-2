@@ -8,8 +8,8 @@ trigger:
 resources:
 - repo: self
 
-variables:
-  tag: '$(Build.BuildId)'
+# variables:
+#   tag: '$(Build.BuildId)'
 
 stages:
 - stage: Build
@@ -27,12 +27,12 @@ stages:
         repository: 'bijuthomaspta / currency-exchange-devops'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-        tags: '$(tag)'
+        tags: 351
     
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'maniest'
+        ArtifactName: 'manifests'
         publishLocation: 'Container'
 - stage: Deploy
   displayName: deploy image
@@ -47,12 +47,12 @@ stages:
         inputs:
           buildType: 'current'
           artifactName: 'manifests'
-          targetPath: '$(system.ArtifactsDirectory)'
+          targetPath: '$(system.ArtifactStagingDirectory)'
   
       - task: KubernetesManifest@0
         inputs:
           action: 'deploy'
           kubernetesServiceConnection: 'Azure_kubernetes_connection-2'
           namespace: 'default'
-          manifests: '$(system.ArtifactsDirectory)/configuration/kubernetes/deployment.yml'
-          containers: 'bijuthomaspta / currency-exchange-devops:$(tag)'
+          manifests: '$(system.ArtifactStagingDirectory)/configuration/kubernetes/deployment.yml'
+          containers: 'bijuthomaspta / currency-exchange-devops:351'
