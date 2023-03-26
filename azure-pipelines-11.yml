@@ -30,7 +30,7 @@ steps:
     backendAzureRmResourceGroupLocation: 'westeurope'
     backendAzureRmStorageAccountName: 'storagezccountxyz'
     backendAzureRmContainerName: 'sotorageaccountcontiner'
-    backendAzureRmKey: 'kubernets-dev5.tfstate'
+    backendAzureRmKey: 'kubernets-dev6.tfstate'
     allowTelemetryCollection: true
 
 
@@ -38,5 +38,5 @@ steps:
   inputs:
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes/'
-    commandOptions: '-var id=$(id) -var p=$(p) -var ssh_key=$(pulickey.azure_rsa.pub)'
+    commandOptions: '-var id=$(id) -var p=$(p) -var ssh_key=$(pulickey.azure_rsa.pub)  --lock=false'
     allowTelemetryCollection: true
