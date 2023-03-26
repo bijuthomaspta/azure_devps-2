@@ -61,4 +61,4 @@ stages:
         kubernetesServiceConnection: 'aks'
         namespace: 'default'
         manifests: '$(System.ArtifactsDirectory)/configuration/kubernetes/deployment.yaml'
-        containers: 'bijuthomaspta/hello-world-java:$(tag)'
+        containers: 'bijuthomaspta / dockerpush_via_azure_devops_new:$(tag)'
