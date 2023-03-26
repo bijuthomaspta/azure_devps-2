@@ -4,8 +4,8 @@ trigger:
 resources:
 - repo: self
 
-# variables:
-#   tag: '$(Build.BuildId)'
+variables:
+  tag: '$(Build.BuildId)'
 
 stages:
 - stage: Build
@@ -16,14 +16,14 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-#     - task: Docker@2
-#       displayName: Build and Push an image
-#       inputs:
-#         containerRegistry: 'Docker_hub_connection'
-#         repository: 'bijuthomaspta/currency-exchange-devops'
-#         command: 'buildAndPush'
-#         Dockerfile: '**/Dockerfile'
-#         tags: '$(tag)'
+    - task: Docker@2
+      displayName: Build and Push an image
+      inputs:
+        containerRegistry: 'Docker_hub_connection'
+        repository: 'bijuthomaspta/currency-exchange-devops'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(tag)'
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
@@ -61,4 +61,4 @@ stages:
         kubernetesServiceConnection: 'aks'
         namespace: 'default'
         manifests: '$(System.ArtifactsDirectory)/configuration/kubernetes/deployment.yaml'
-        containers: 'bijuthomaspta/hello-world-java:0.0.1.RELEASE'
+        containers: 'bijuthomaspta/hello-world-java:$(tag)'
