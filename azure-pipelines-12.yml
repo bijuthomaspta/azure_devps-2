@@ -54,5 +54,5 @@ stages:
           action: 'deploy'
           kubernetesServiceConnection: 'Azure_kubernetes_connection-2'
           namespace: 'default'
-          manifests: '$(System.ArtifactsDirectory)/configuration/kubernetes/deployment.yaml'
+          manifests: '$(System.DefaultWorkingDirectory)/configuration/kubernetes/deployment.yaml'
           containers: 'bijuthomaspta / currency-exchange-devops:351'
