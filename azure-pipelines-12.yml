@@ -47,12 +47,12 @@ stages:
         inputs:
           buildType: 'current'
           artifactName: 'manifests'
-          targetPath: '$(system.ArtifactStagingDirectory)'
+          targetPath: '$(System.ArtifactsDirectory)'
   
       - task: KubernetesManifest@0
         inputs:
           action: 'deploy'
           kubernetesServiceConnection: 'Azure_kubernetes_connection-2'
           namespace: 'default'
-          manifests: '$(system.ArtifactStagingDirectory)/configuration/kubernetes/deployment.yml'
+          manifests: '$(System.ArtifactsDirectory)/configuration/kubernetes/deployment.yaml'
           containers: 'bijuthomaspta / currency-exchange-devops:351'
