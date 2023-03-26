@@ -21,7 +21,7 @@ steps:
   inputs:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes/'
-    commandOptions: '-var client_id=$(id) -var client_secret=$(p) -var ssh_public_key=$(pulickey.azure_rsa.pub)'
+    commandOptions: '-var client_id=$(id) -var client_secret=$(p) -var ssh_public_key=$(publickey.secureFilePath)'
     backendType: 'azurerm'
     backendServiceArm: 'Azure_resource_connection'
     backendAzureRmSubscriptionId: '5282a96d-cc9d-4a51-9ba6-6e649fa394bc'
@@ -37,6 +37,7 @@ steps:
   inputs:
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes/'
-    commandOptions: '-var client_id=$(id) -var client_secret=$(p) -var ssh_public_key=$(pulickey.azure_rsa.pub)  --lock=false'
+    commandOptions: '-var client_id=$(id) -var client_secret=$(p) -var ssh_public_key=$(publickey.secureFilePath)  --lock=false'
     allowTelemetryCollection: true
+    
 
