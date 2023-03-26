@@ -58,7 +58,7 @@ stages:
     - task: KubernetesManifest@0
       inputs:
         action: 'deploy'
-        kubernetesServiceConnection: 'Azure_kubernetes_connection-2'
+        kubernetesServiceConnection: 'aks'
         namespace: 'default'
         manifests: '$(System.ArtifactsDirectory)/configuration/kubernetes/deployment.yaml'
         containers: 'bijuthomaspta/hello-world-java:0.0.1.RELEASE'
