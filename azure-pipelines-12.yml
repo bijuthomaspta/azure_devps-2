@@ -19,7 +19,7 @@ stages:
     - task: Docker@2
       displayName: Build and Push an image
       inputs:
-        containerRegistry: 'My_Doscker_Hub'
+        containerRegistry: 'Docker_hub_connection'
         repository: 'bijuthomaspta/currency-exchange-devops'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
@@ -58,7 +58,7 @@ stages:
     - task: KubernetesManifest@0
       inputs:
         action: 'deploy'
-        kubernetesServiceConnection: 'Kubernetes_connection'
+        kubernetesServiceConnection: 'Azure_kubernetes_connection-2'
         namespace: 'default'
         manifests: '$(System.ArtifactsDirectory)/configuration/kubernetes/deployment.yaml'
         containers: 'bijuthomaspta/hello-world-java23:${tag}'
