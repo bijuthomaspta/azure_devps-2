@@ -24,16 +24,16 @@ stages:
 #         command: 'buildAndPush'
 #         Dockerfile: '**/Dockerfile'
 #         tags: '$(tag)'
-#     - task: CopyFiles@2
-#       inputs:
-#         SourceFolder: '$(System.DefaultWorkingDirectory)'
-#         Contents: '**/*.yaml'
-#         TargetFolder: '$(Build.ArtifactStagingDirectory)'
-#     - task: PublishBuildArtifacts@1
-#       inputs:
-#         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-#         ArtifactName: 'manifests'
-#         publishLocation: 'Container'
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '**/*.yaml'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'manifests'
+        publishLocation: 'Container'
 
 # Build
 # Build Docker
