@@ -24,12 +24,12 @@ resource "aws_default_vpc" "default" {
 # }
 
 data "aws_eks_cluster" "cluster" { 
-  name = module.my-cluster_in_aws_eks.cluster_id
+  name = module.my-cluster.cluster_id
     #"my-cluster_in_aws_eks"
 }
 
 data "aws_eks_cluster_auth" "cluster" { 
-  name =  module.my-cluster_in_aws_eks.cluster_id 
+  name =  module.my-cluster.cluster_id 
     #"my-cluster_in_aws_eks"
 }
 
