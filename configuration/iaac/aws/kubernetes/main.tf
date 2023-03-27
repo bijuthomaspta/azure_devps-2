@@ -58,9 +58,9 @@ module "my-cluster" {
   eks_managed_node_groups = {
     one = {
       instance_type = "t2.micro"
-      max_capacity  = 3
+      max_capacity  = 5
       desired_capacity = 3
-      min_capacity  = 1
+      min_capacity  = 3
     }
   }
 }
