@@ -26,11 +26,11 @@ steps:
     backendAWSKey: 'kubernetes-dev.tfstate'
 
 
-- task: TerraformTaskV4@4
-  inputs:
-    provider: 'aws'
-    command: 'validate'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/aws/kubernetes/'
+# - task: TerraformTaskV4@4
+#   inputs:
+#     provider: 'aws'
+#     command: 'validate'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/aws/kubernetes/'
 
 - task: TerraformTaskV4@4
   inputs:
