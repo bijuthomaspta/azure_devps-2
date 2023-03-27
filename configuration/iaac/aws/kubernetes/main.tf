@@ -17,66 +17,52 @@ resource "aws_default_vpc" "default" {
 
 }
 
-# data "aws_subnet_ids" "subnets" {
-#   vpc_id = aws_default_vpc.default.id
-# }
-
-# data "aws_eks_cluster" "cluster" { 
-#   name = "my-cluster_in_aws_eks"
-# #   name = module.my-cluster.cluster_id
-# }
-
-# data "aws_eks_cluster_auth" "cluster" { 
-#   name = "my-cluster_in_aws_eks"
-#    name = module.my-cluster.cluster_id
-# }
-
-
-provider "kubernetes" {
-  host                   = module.my-cluster.endpoint
-  cluster_ca_certificate = base64decode( module.my-cluster.certificate_authority.0.data)
-  token                  =  module.my-cluster.token
-#   load_config_file       = false
- # version                = "~> 1.21"
+data "aws_subnet_ids" "subnets" {
+  vpc_id = aws_default_vpc.default.id
 }
 
-# module "my-cluster" {
-#   source          =  "terraform-aws-modules/eks/aws"
-#   cluster_name    = "local.my-cluster"
-#   cluster_version = "1.14"
+provider "kubernetes" {
+  host                   = data.aws_eks_cluster.cluster.endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
+  token                  = data.aws_eks_cluster_auth.cluster.token
+  version                = "~> 2.12"
+}
 
-module "my-cluster" {
+module "in28minutes-cluster" {
   source          = "terraform-aws-modules/eks/aws"
-  cluster_name    = my-cluster_in_aws_eks
-#   cluster_version = "1.14"
-  subnet_ids = ["subnet-02936de47e6a8ed9a", "subnet-0b49263fc566e6873"] 
-  #subnets         = ["subnet-01f9ebf3562398329", "subnet-0291156351ccb436b"] #CHANGE
+  cluster_name    = "in28minutes-cluster"
+  cluster_version = "1.14"
+  subnets         = ["subnet-3f7b2563", "subnet-4a7d6a45"] #CHANGE
   #subnets = data.aws_subnet_ids.subnets.ids
   vpc_id          = aws_default_vpc.default.id
 
   #vpc_id         = "vpc-1234556abcdef"
 
-#   node_groups = [
-  eks_managed_node_groups = {
-    one = {
+  node_groups = [
+    {
       instance_type = "t2.micro"
-      max_capacity  = 3
+      max_capacity  = 5
       desired_capacity = 3
-      min_capacity  = 1
+      min_capacity  = 3
     }
-  }
+  ]
 }
 
+data "aws_eks_cluster" "cluster" {
+  name = module.in28minutes-cluster.cluster_id
+}
+
+data "aws_eks_cluster_auth" "cluster" {
+  name = module.in28minutes-cluster.cluster_id
+}
 
 
 # We will use ServiceAccount to connect to K8S Cluster in CI/CD mode
 # ServiceAccount needs permissions to create deployments 
 # and services in default namespace
-  
-  
 resource "kubernetes_cluster_role_binding" "example" {
   metadata {
-    name = "terraormawsk8s"
+    name = "fabric8-rbac"
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
