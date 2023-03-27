@@ -72,11 +72,9 @@ module "my-cluster" {
 # We will use ServiceAccount to connect to K8S Cluster in CI/CD mode
 # ServiceAccount needs permissions to create deployments 
 # and services in default namespace
-  
-  
-resource "kubernetes_cluster_role_binding" "example" {
+ resource "kubernetes_cluster_role_binding" "example" {
   metadata {
-    name = "fabric8-rbac"
+    name = "terraform-example"
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
@@ -84,8 +82,15 @@ resource "kubernetes_cluster_role_binding" "example" {
     name      = "cluster-admin"
   }
   subject {
+    kind      = "User"
+    name      = "admin"
+    api_group = "rbac.authorization.k8s.io"
+  }
+  subject {
     kind      = "ServiceAccount"
     name      = "default"
     namespace = "default"
-  }
+  } 
+  
+
 }
