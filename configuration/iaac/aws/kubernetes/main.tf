@@ -5,6 +5,13 @@ provider "aws" {
   region = "ap-south-1"
 }
 
+terraform {
+  backend "s3" {
+    bucket = "terraform-backendstate-in28minutes-123" # Will be overridden from build
+    key    = "path/to/my/key" # Will be overridden from build
+    region = "ap-south-1"
+  }
+
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.5.1"
