@@ -11,8 +11,8 @@ terraform {
     key    = "path/to/my/key" # Will be overridden from build
     region = "ap-south-1"
   }
-  
-  terraform {
+}
+terraform {
   required_providers {
     aws = "~> 4.47.0"
     random = "~> 3.4.3"
@@ -20,7 +20,6 @@ terraform {
     cloudinit = "~> 2.2.0"
   }
 }
-
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.5.1"
