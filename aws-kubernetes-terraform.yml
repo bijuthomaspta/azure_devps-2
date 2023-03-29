@@ -25,7 +25,6 @@ steps:
     backendAWSBucketName: 'terraform-backendstate-in28minutes-123'
     backendAWSKey: 'kubernetes-dev.tfstate'
 
-
 # - task: TerraformTaskV4@4
 #   inputs:
 #     provider: 'aws'
@@ -35,7 +34,7 @@ steps:
 - task: TerraformTaskV4@4
   inputs:
     provider: 'aws'
-    command: 'destroy'
+    command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/aws/kubernetes/'
     environmentServiceNameAWS: 'aws for terraform'
 
