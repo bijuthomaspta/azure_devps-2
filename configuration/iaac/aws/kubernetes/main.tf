@@ -69,53 +69,25 @@ module "eks" {
 #     "terraform" = "true"
 #   }
 #     }
-# resource "kubernetes_cluster_role_binding" "example" {
-#   metadata {
-#     name = "fabric8-rbac"
-#   }
-#   role_ref {
-#     api_group = "rbac.authorization.k8s.io"
-#     kind      = "ClusterRole"
-#     name      = "cluster-admin"
-#   }
-#   subject {
-#     kind      = "ServiceAccount"
-#     name      = "default"
-#     namespace = "default"
-#   }
-# }
-  
 resource "kubernetes_cluster_role_binding" "example" {
   metadata {
-    name = "terraform-example"
+    name = "fabric8-rbac"
   }
-role_ref {
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: my-serviceaccount
-  namespace: dev
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  # "namespace" omitted since ClusterRoles are not namespaced
-  name: my-secrets-clusterrole
-rules:
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get", "watch", "list"]
   
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: read-secrets-global
-subjects:
-- kind: ServiceAccount
-  name: my-serviceaccount # name of your service account
-  namespace: dev # this is the namespace your service account is in
-roleRef: # referring to your ClusterRole
-  kind: ClusterRole
-  name: my-secrets-clusterrole
-  apiGroup: rbac.authorization.k8s.io
+  apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    name: "new user"
+    namespace: "new user namespace"
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "cluster-admin"
+  }
+  subject {
+    kind      = "ServiceAccount"
+    name: "new user"
+    namespace: "new user namespace"
+  }
 }
-}
+  
