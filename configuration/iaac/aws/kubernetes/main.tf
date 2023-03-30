@@ -33,7 +33,7 @@ module "eks" {
     one = {
       name = "node-group-1"
 
-      instance_types = ["t3.small"]
+      instance_types = ["t2.micro"]
 
       min_size     = 1
       max_size     = 3
@@ -74,7 +74,7 @@ resource "kubernetes_cluster_role_binding" "example" {
     name = "fabric8-rbac"
   }
   role_ref {
-    api_group = "rbac.authorization.registry.k8s.io"
+    api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
     name      = "cluster-admin"
   }
