@@ -73,12 +73,13 @@ resource "kubernetes_cluster_role_binding" "example" {
   metadata {
     name = "fabric8-rbac"
   }
-  
+  subject {
   apiVersion: v1
   kind: ServiceAccount
   metadata:
     name: "new user"
     namespace: "new user namespace"
+  }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
