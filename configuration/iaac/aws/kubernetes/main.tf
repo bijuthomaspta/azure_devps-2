@@ -84,6 +84,12 @@ module "eks" {
 #     namespace = "default"
 #   }
 # }
+  
+resource "kubernetes_cluster_role_binding" "example" {
+  metadata {
+    name = "terraform-example"
+  }
+role_ref {
 apiVersion: v1
 kind: ServiceAccount
 metadata:
