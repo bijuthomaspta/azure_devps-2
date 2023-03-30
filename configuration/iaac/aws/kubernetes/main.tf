@@ -117,4 +117,5 @@ roleRef: # referring to your ClusterRole
   kind: ClusterRole
   name: my-secrets-clusterrole
   apiGroup: rbac.authorization.k8s.io
- 
+}
+}
