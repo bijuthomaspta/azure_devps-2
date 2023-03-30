@@ -80,8 +80,8 @@ resource "kubernetes_cluster_role_binding" "example" {
   }
   subject {
     kind      = "ServiceAccount"
-    name: "new user"
-    namespace: "new user namespace"
+    name: "default"
+    namespace: "default"
   }
 }
   
