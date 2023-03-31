@@ -13,6 +13,12 @@ terraform {
   }
 }
 
+provider "kubernetes" {
+  host                   = data.aws_eks_cluster.example.endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.example.certificate_authority[0].data)
+  token                  = data.aws_eks_cluster_auth.example.token
+ }
+
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.5.1"
@@ -40,7 +46,7 @@ module "eks" {
       desired_size = 2
     }
   }
-
+}
 #   load_config_file       = false
 
 # https://aws.amazon.com/blogs/containers/amazon-ebs-csi-driver-is-now-generally-available-in-amazon-eks-add-ons/
@@ -70,19 +76,14 @@ module "eks" {
 #   }
 #     }
 data "aws_eks_cluster" "example" {
-  name =  module.eks.cluster_name 
+  name =  module.eks.cluster_id 
 }
 
 data "aws_eks_cluster_auth" "example" {
-  name =  module.eks.cluster_name
+  name =  module.eks.cluster_id
 }
 
-provider "kubernetes" {
-  host                   = data.aws_eks_cluster.example.endpoint
-  cluster_ca_certificate = base64decode(data.aws_eks_cluster.example.certificate_authority[0].data)
-  token                  = data.aws_eks_cluster_auth.example.token
- }
-}
+
 resource "kubernetes_cluster_role_binding" "example" {
   metadata {
     name = "fabric8-rbac"
