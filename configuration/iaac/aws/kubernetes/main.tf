@@ -30,7 +30,7 @@ resource "aws_default_vpc" "default" {
 #   token                  = data.aws_eks_cluster_auth.cluster.token
 #   load_config_file       = false
  # version                = "~> 1.21"
-}
+# }
 
 # module "my-cluster" {
 #   source          =  "terraform-aws-modules/eks/aws"
