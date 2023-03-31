@@ -24,13 +24,13 @@ resource "aws_default_vpc" "default" {
 
 
 
-# provider "kubernetes" {
-#   host                   = data.aws_eks_cluster.cluster.endpoint
-#   cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
-#   token                  = data.aws_eks_cluster_auth.cluster.token
+provider "kubernetes" {
+  host                   = data.aws_eks_cluster.cluster.endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
+  token                  = data.aws_eks_cluster_auth.cluster.token
 #   load_config_file       = false
- # version                = "~> 1.21"
-# }
+#  version                = "~> 1.21"
+}
 
 # module "my-cluster" {
 #   source          =  "terraform-aws-modules/eks/aws"
@@ -62,30 +62,30 @@ module "my-cluster" {
 # We will use ServiceAccount to connect to K8S Cluster in CI/CD mode
 # ServiceAccount needs permissions to create deployments 
 # and services in default namespace
-# resource "kubernetes_cluster_role_binding" "example" {
-#   metadata {
-#     name = "fabric8-rbac"
-#   }
-#   role_ref {
-#     api_group = "rbac.authorization.k8s.io"
-#     kind      = "ClusterRole"
-#     name      = "cluster-admin"
-#   }
-#   subject {
-#     kind      = "ServiceAccount"
-#     name      = "default"
-#     namespace = "default"
-#   }
-# }
+resource "kubernetes_cluster_role_binding" "example" {
+  metadata {
+    name = "fabric8-rbac"
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "cluster-admin"
+  }
+  subject {
+    kind      = "ServiceAccount"
+    name      = "default"
+    namespace = "default"
+  }
+}
   
   
-# data "aws_eks_cluster" "cluster" { 
-#   name = "my-cluster_in_aws_eks"
-# }
+data "aws_eks_cluster" "cluster" { 
+  name = "my-cluster_in_aws_eks"
+}
 
-# data "aws_eks_cluster_auth" "cluster" { 
-#   name = "my-cluster_in_aws_eks"
-# }
+data "aws_eks_cluster_auth" "cluster" { 
+  name = "my-cluster_in_aws_eks"
+}
 
 # Needed to set the default region
 provider "aws" {
