@@ -76,11 +76,11 @@ module "eks" {
 #   }
 #     }
 data "aws_eks_cluster" "example" {
-  name =  module.eks.cluster_id 
+  name =  module.eks.cluster_name 
 }
 
 data "aws_eks_cluster_auth" "example" {
-  name =  module.eks.cluster_id
+  name =  module.eks.cluster_name
 }
 
 
