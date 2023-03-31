@@ -42,11 +42,11 @@ module "eks" {
   }
 }
 data "aws_eks_cluster" "example" {
-  name =  "aws_eks_cluster_via_terraform"
+  name =  module.eks.cluster_name 
 }
 
 data "aws_eks_cluster_auth" "example" {
-  name =  "aws_eks_cluster_via_terraform"
+  name =  module.eks.cluster_name
 }
 
 provider "kubernetes" {
