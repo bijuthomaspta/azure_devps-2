@@ -85,6 +85,15 @@ resource "kubernetes_cluster_role_binding" "example" {
     namespace = "default"
   }
 }
+  
+  
+  data "aws_eks_cluster" "cluster" { 
+  name = "my-cluster_in_aws_eks"
+}
+
+data "aws_eks_cluster_auth" "cluster" { 
+  name = "my-cluster_in_aws_eks"
+}
 
 # Needed to set the default region
 provider "aws" {
