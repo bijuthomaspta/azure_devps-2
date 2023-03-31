@@ -59,14 +59,6 @@ module "my-cluster" {
   }
 }
 
-data "aws_eks_cluster" "cluster" { 
-  name = "my-cluster_in_aws_eks"
-}
-
-data "aws_eks_cluster_auth" "cluster" { 
-  name = "my-cluster_in_aws_eks"
-}
-
 # We will use ServiceAccount to connect to K8S Cluster in CI/CD mode
 # ServiceAccount needs permissions to create deployments 
 # and services in default namespace
@@ -87,7 +79,7 @@ resource "kubernetes_cluster_role_binding" "example" {
 }
   
   
-  data "aws_eks_cluster" "cluster" { 
+data "aws_eks_cluster" "cluster" { 
   name = "my-cluster_in_aws_eks"
 }
 
