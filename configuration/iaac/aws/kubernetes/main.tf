@@ -43,7 +43,6 @@ module "eks" {
 }
 
 #   load_config_file       = false
-}
 
 # https://aws.amazon.com/blogs/containers/amazon-ebs-csi-driver-is-now-generally-available-in-amazon-eks-add-ons/
 # data "aws_iam_policy" "ebs_csi_policy" {
@@ -83,7 +82,7 @@ provider "kubernetes" {
   host                   = data.aws_eks_cluster.example.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.example.certificate_authority[0].data)
   token                  = data.aws_eks_cluster_auth.example.token
-
+}
 
 resource "kubernetes_cluster_role_binding" "example" {
   metadata {
